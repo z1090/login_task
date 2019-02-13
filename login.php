@@ -17,8 +17,10 @@
 
             $loggedIn = false;
 
-            function printWelcomeMessage() {
-                include "welcome_page.php";
+            function printWelcomeMessage($loggedIn) {
+                if($loggedIn === true) {
+                    include("welcome_page.php");
+                };
             };
 
             function printLogInForm($errMessage) {
@@ -28,14 +30,13 @@
             function logInCheck($DB_EMAIL, $DB_PASSWORD) {
                 $errMessage = "";
 
-
                 if(!empty($_POST) && $_POST["action"] === "Log in") {
                     $email = $_POST["email"];
                     $password = $_POST["password"];
             
                     if($DB_EMAIL === $email && $DB_PASSWORD === $password){
                         $loggedIn = true;
-                        printWelcomeMessage();
+                        printWelcomeMessage($loggedIn);
                     } else {
                         $errMessage = "Details incorrect.";
                         // echo "Details incorrect.";
