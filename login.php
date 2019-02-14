@@ -1,58 +1,30 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>My Wonderful SIte</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css"> -->
-    
-</head>
-<body>
-    <div class="container">
+<? include "./partials/header.php"; ?>
 
-        <?php
-            $DB_EMAIL = "root@root.com";
-            $DB_PASSWORD = "root";
+<?php
 
-            $loggedIn = false;
+    $DB_EMAIL = "root@root.com";
+    $DB_PASSWORD = "root";
+    $DB_FIRST_NAME = "Ian";
 
-            function printWelcomeMessage($loggedIn) {
-                if($loggedIn === true) {
-                    include("welcome_page.php");
-                };
-            };
+    if(empty($_POST)) {
+        $errMessage = "";
+        include "./partials/log_in_form.php";
+    };
 
-            function printLogInForm($errMessage) {
-                include "logInForm.php";
-            };
+    if(!empty($_POST) && $_POST["action"] === "Log in") {
+        $email = $_POST["email"];
+        $password = $_POST["password"];
 
-            function logInCheck($DB_EMAIL, $DB_PASSWORD) {
-                $errMessage = "";
+        if($DB_EMAIL === $email && $DB_PASSWORD === $password){
+            $_SESSION["loggedIn"] = true;
+            $_SESSION["firstName"] = $DB_FIRST_NAME;
+            header("Location: ./members_area.php");
+            exit;
+        } else {
+            $errMessage = "Details incorrect.";
+            include "./partials/log_in_form.php";
+        };
+    };
+?>
 
-                if(!empty($_POST) && $_POST["action"] === "Log in") {
-                    $email = $_POST["email"];
-                    $password = $_POST["password"];
-            
-                    if($DB_EMAIL === $email && $DB_PASSWORD === $password){
-                        $loggedIn = true;
-                        printWelcomeMessage($loggedIn);
-                    } else {
-                        $errMessage = "Details incorrect.";
-                        // echo "Details incorrect.";
-                        // echo $errMessage;
-                        printLogInForm($errMessage);
-                    };
-                } else {
-                    printLogInForm($errMessage);
-                };
-            };
-            
-            logInCheck($DB_EMAIL, $DB_PASSWORD);
-
-        ?>
-    </div>
-
-    <!-- <script src="main.js"></script> -->
-</body>
-</html>
+<? include "./partials/footer.php"; ?>

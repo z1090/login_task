@@ -1,5 +1,4 @@
 
-
 <h1>Log In</h1>
 <p><?echo$errMessage?></p>
 <form action="login.php" method="POST">
