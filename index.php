@@ -4,13 +4,10 @@
 
 <?php
 
-    if(isset($_SESSION["loggedIn"])){?>
+    if(isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] === true){?>
         <p>Welcome back, <?echo $_SESSION["firstName"];?></p>
     <?};
-
-    // if(isset($_SESSION["firstName"])){
-    //     echo "Welcome back ".$_SESSION["firstName"];
-    // };
+    
 
 ?>
 

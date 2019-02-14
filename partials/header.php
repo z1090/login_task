@@ -1,5 +1,6 @@
 <?php 
     session_start();
+    include_once "./partials/db_connection.php";
 ?>
 
 <!DOCTYPE html>
@@ -24,7 +25,7 @@
 
                 <?} else {?>
                     <li><a href="./login.php">Log in</a></li>
-                    <li><a href="./login.php">Sign up</a></li>
+                    <li><a href="./sign_up.php">Sign up</a></li>
                 <?};?>    
             </ul>
         </nav>
