@@ -1,6 +1,6 @@
 
 <h1>Sign Up</h1>
-<p><?echo$errMessage?></p>
+<p><?echo$message?></p>
 <form action="sign_up.php" method="POST">
     <section class="form-group">
         <label for="first_name">First Name</label>
