@@ -21,3 +21,8 @@ INSERT INTO `users` (`first_name`, `last_name`, `email`, `password`) VALUES
 
 
 ALTER TABLE `users` ADD COLUMN `Email_Valid_Str` CHAR(32);
+
+ALTER TABLE `users` ADD COLUMN `question` CHAR(1) NOT NULL;
+ALTER TABLE `users` ADD COLUMN `answer` VARCHAR(255)  NOT NULL;
+
+ALTER TABLE `users` DROP COLUMN `answer`;

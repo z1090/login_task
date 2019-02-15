@@ -25,3 +25,5 @@ if($_GET && $_GET["signup"]){
     </section>
     <input type="submit" name="action" value="Log in" />
 </form>
+
+<a href="password_reset.php">Forgotten Password?</a>

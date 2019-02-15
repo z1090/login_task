@@ -29,6 +29,10 @@
             $clean_last_name = mysqli_real_escape_string($db_connection, $_POST["last_name"]);
             $clean_email = mysqli_real_escape_string($db_connection, $_POST["email"]);
 
+            $clean_question = mysqli_real_escape_string($db_connection, $_POST["secret_question"]);
+            $hashed_answer = password_hash($_POST["secret_answer"], PASSWORD_DEFAULT);
+            $clean_answer = mysqli_real_escape_string($db_connection, $hashed_answer);
+
             $hashed_password = password_hash($_POST["password"], PASSWORD_DEFAULT);
             $clean_password = mysqli_real_escape_string($db_connection, $hashed_password);
 
@@ -36,7 +40,7 @@
             $emailValidkey = generateKey($db_connection);
             $clean_emailValidkey = mysqli_real_escape_string($db_connection, $emailValidkey);
 
-            $query = "INSERT INTO users (`first_name`, `last_name`, `email`, `password`, `Email_Valid_Str`) VALUES ('$clean_first_name', '$clean_last_name', '$clean_email', '$clean_password', '$clean_emailValidkey');";
+            $query = "INSERT INTO users (`first_name`, `last_name`, `email`, `password`, `Email_Valid_Str`, `question`, `answer`) VALUES ('$clean_first_name', '$clean_last_name', '$clean_email', '$clean_password', '$clean_emailValidkey', '$clean_question', '$clean_answer');";
 
             var_dump($query);
 
