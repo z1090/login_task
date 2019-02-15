@@ -17,11 +17,15 @@ if($_GET && $_GET["signup"]){
 <form action="login.php" method="POST">
     <section class="form-group">
         <label for="email">Email</label>
-        <input type="email" name="email" id="email" />
+        <input type="email" name="email" id="email" value="<?echo$emailField?>"/>
     </section>
     <section class="form-group">
         <label for="password">Password</label>
         <input type="password" name="password" id="password" />
+    </section>
+    <section class="form-group">
+        <label for="remember">Remember Me</label>
+        <input type="checkbox" name="remember" id="remember" />
     </section>
     <input type="submit" name="action" value="Log in" />
 </form>

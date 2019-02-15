@@ -2,6 +2,8 @@
 
 <?php
 
+// var_dump($_POST);
+
     if(isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] === true){
         header("Location: ./index.php");
         exit;
@@ -11,6 +13,7 @@
 
 
         if($_POST && !empty($_POST["email"]) && !empty($_POST["password"])) {
+
             $email = $_POST["email"];
             $password = $_POST["password"];
 
@@ -23,6 +26,11 @@
                 if($row["email"]=== $email && password_verify($password, $row["password"])){
 
                     if($row["verified"] == 1){
+
+                        if($_POST["remember"]) {
+                            setcookie("user", $_POST["email"], strtotime("+7 days"));
+                        };
+
                         $_SESSION["loggedIn"] = true;
                         $_SESSION["firstName"] = $row["first_name"];
                         $_SESSION["lastName"] = $row["last_name"];
@@ -52,8 +60,24 @@
             include "./partials/log_in_form.php";
             
         } else {
+            $emailField = "";
             $message = "";
-            include "./partials/log_in_form.php";
+            if(isset($_COOKIE["user"])) {
+                $emailField = $_COOKIE["user"];
+
+                $query = "SELECT `first_name` FROM `users` WHERE `email` = '$emailField'";
+                $result = mysqli_query($db_connection, $query);
+                
+                if (mysqli_num_rows($result) === 1){
+                    $row = mysqli_fetch_assoc($result);
+                    $name =  $row["first_name"];
+                };
+                    $message = "Hey $name! Just give us yer password and we'll let you back in.";
+                    include "./partials/log_in_form.php";
+                    include "scripts/password_field_focus.js";
+            } else {
+                include "./partials/log_in_form.php";
+            };
         };
     };
 ?>
